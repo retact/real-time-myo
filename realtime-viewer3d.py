@@ -6,7 +6,7 @@
 import multiprocessing as mp
 import numpy as np
 import matplotlib.pyplot as plt
-import mpl_toolkits.mplot3d.axes3d import Axes3D
+from mpl_toolkits.mplot3d.axes3d import Axes3D
 from matplotlib.animation import FuncAnimation
 import ctypes as c
 import sys
