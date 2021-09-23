@@ -55,8 +55,8 @@ def viewer(emg_data):
     ax3.set_xlabel("Number of data", fontsize=8)
     ax3.set_ylabel("Electrodes", fontsize=8)
     ax3.set_zlabel("EMG signals[mV]", fontsize=8)
-    ax.view_init(elev=25, azim=-165)
-    ax.xaxis._axinfo['label']['space_factor'] = 0.2
+    ax3.view_init(elev=25, azim=-165)
+    ax3.xaxis._axinfo['label']['space_factor'] = 0.2
     signals = []
     dsignals = []
 
