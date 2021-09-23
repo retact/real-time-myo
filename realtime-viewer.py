@@ -52,9 +52,9 @@ def viewer(emg_data):
     # ax2.set_xlabel('Number of Data',fontsize=12)
     ax3 = fig.add_subplot(212, projection="3d")
     ax3.set(xlim=[0, window_size], zlim=[-128, 127])
-    ax3.set_xlabel("Number of data", fontsize=8)
-    ax3.set_ylabel("Electrodes", fontsize=8)
-    ax3.set_zlabel("EMG signals[mV]", fontsize=8)
+    ax3.set_xlabel("Number of data", labelpad=7, fontsize=10)
+    ax3.set_ylabel("Electrodes", labelpad=7, fontsize=10)
+    ax3.set_zlabel("mV", fontsize=10)
     ax3.xaxis._axinfo['label']['space_factor'] = 0.2
     signals = []
     dsignals = []
