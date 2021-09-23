@@ -46,12 +46,17 @@ def viewer(emg_data):
     # ax2.set(xlim=[0,window_size],ylim=[-128,127])
     ax1.set_title('Myo Armband 1', fontsize=15)
     # ax2.set_title('Myo Armband 2',fontsize=15)
-    ax1.set_ylabel('EMG signals', fontsize=12)
+    ax1.set_ylabel('EMG signals[mV]', fontsize=12)
     # ax2.set_ylabel('EMG signals',fontsize=12)
     ax1.set_xlabel('Number of Data', fontsize=12)
     # ax2.set_xlabel('Number of Data',fontsize=12)
     ax3 = fig.add_subplot(212, projection="3d")
-    ax3.set(xlim=[0, window_size], zlim=[-128, 127], ylabel="Electrodes", xlabel="Time", zlabel= "mV")
+    ax3.set(xlim=[0, window_size], zlim=[-128, 127])
+    ax3.set_xlabel("Number of data", fontsize=8)
+    ax3.set_ylabel("Electrodes", fontsize=8)
+    ax3.set_zlabel("EMG signals[mV]", fontsize=8)
+    ax.view_init(elev=25, azim=-165)
+    ax.xaxis._axinfo['label']['space_factor'] = 0.2
     signals = []
     dsignals = []
 
@@ -72,7 +77,6 @@ def viewer(emg_data):
             dsignal.set_data(np.arange(window_size), np.full_like(np.arange(window_size), count_2+1))
             dsignal.set_3d_properties(emg_data[:, count_2])
             dsignal.set_alpha(1)
-        print(emg_data)
 
     ani = FuncAnimation(fig, update, interval=100)
     plt.show()
