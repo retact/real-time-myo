@@ -50,15 +50,15 @@ def viewer(emg_data):
     # ax2.set_ylabel('EMG signals',fontsize=12)
     ax1.set_xlabel('Number of Data', fontsize=12)
     # ax2.set_xlabel('Number of Data',fontsize=12)
-    ax2 = fig.add_subplot(212, projection="3d")
-
+    ax3 = fig.add_subplot(212, projection="3d")
+    ax3.set(xlim=[0, window_size], zlim=[-128, 127], ylabel="Electrodes", xlabel="Time", zlabel= "mV")
     signals = []
     dsignals = []
 
     for i in range(8):
         signal, = ax1.plot(np.arange(window_size), np.zeros(window_size), alpha=0.4)
         signals.append(signal)
-        dsignal, = ax2.plot(np.arange(window_size), np.full_like(np.arange(window_size), i+1),
+        dsignal, = ax3.plot(np.arange(window_size), np.full_like(np.arange(window_size), i+1),
                             np.arange(window_size))
         dsignals.append(dsignal)
     #for i in range(8):
