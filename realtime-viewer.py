@@ -52,13 +52,13 @@ def viewer(emg_data):
     ax2 = fig.add_subplot(212, projection="3d")
 
     signals = []
-    3dsignals = []
+    dsignals = []
 
     for i in range(8):
         signal, = ax1.plot(np.arange(window_size), np.zeros(window_size), alpha=0.4)
         signals.append(signal)
-        3dsignal, = ax2.plot(np.arange(windowsize), np.full_like(window_size, i+1),
-                             np.zeros(window_size))
+        dsignal, = ax2.plot(np.arange(windowsize), np.full_like(window_size, i+1),
+                            np.zeros(window_size))
     #for i in range(8):
     #    signal, = ax2.plot(np.arange(window_size),np.zeros(window_size),alpha=0.4)
     #    signals.append(signal)
@@ -67,10 +67,10 @@ def viewer(emg_data):
         for count_1, signal in enumerate(signals):
             signal.set_ydata(emg_data[:, count_1])
         for count_2, 3dsignal in enumrate(3dsignals):
-            3dsignal.set_ydata(np.full_like(window_size, count_2+1))
-            3dsignal.set_3dproperties(emg_data[:, count_2])
+            dsignal.set_ydata(np.full_like(window_size, count_2+1))
+            dsignal.set_3dproperties(emg_data[:, count_2])
 
-    ani = FuncAnimation(fig,update,interval=100)
+    ani = FuncAnimation(fig, update, interval=100)
     plt.show()
 
 m1 = MyoRaw('/dev/ttyACM0')
