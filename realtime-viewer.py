@@ -58,7 +58,7 @@ def viewer(emg_data):
     for i in range(8):
         signal, = ax1.plot(np.arange(window_size), np.zeros(window_size), alpha=0.4)
         signals.append(signal)
-        dsignal, = ax2.plot(np.arange(window_size), np.full_like(window_size, i+1),
+        dsignal, = ax2.plot(np.arange(window_size), np.full_like(np.arange(window_size), i+1),
                             np.arange(window_size))
         dsignals.append(dsignal)
     #for i in range(8):
