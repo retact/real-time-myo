@@ -7,6 +7,7 @@ import multiprocessing as mp
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+from mpl_toolkits.mplot3d.axes3d import Axes3D
 import ctypes as c
 import sys
 import time
