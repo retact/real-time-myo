@@ -70,7 +70,7 @@ def viewer(emg_data):
             signal.set_ydata(emg_data[:, count_1])
         for count_2, dsignal in enumerate(dsignals):
             dsignal.set_data(np.arange(window_size), np.full_like(np.arange(window_size), count_2+1))
-            dsignal.set_3d_properties(emg_data[i:i+window_size, count_2])
+            dsignal.set_3d_properties(emg_data[:, count_2])
             dsignal.set_alpha(1)
         print(emg_data)
 
