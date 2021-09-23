@@ -59,7 +59,7 @@ def viewer(emg_data):
         signal, = ax1.plot(np.arange(window_size), np.zeros(window_size), alpha=0.4)
         signals.append(signal)
         dsignal, = ax2.plot(np.arange(window_size), np.full_like(window_size, i+1),
-                            np.zeros(window_size))
+                            np.arange(window_size))
         dsignals.append(dsignal)
     #for i in range(8):
     #    signal, = ax2.plot(np.arange(window_size),np.zeros(window_size),alpha=0.4)
@@ -71,6 +71,7 @@ def viewer(emg_data):
         for count_2, dsignal in enumrate(dsignals):
             dsignal.set_ydata(np.full_like(window_size, count_2+1))
             dsignal.set_3dproperties(emg_data[:, count_2])
+            dsignal.set_alpha(1)
 
     ani = FuncAnimation(fig, update, interval=100)
     plt.show()
