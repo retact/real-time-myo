@@ -227,7 +227,7 @@ def classifier(emg_data,label_data,label_time):
             pre_times.append(end_time-start_time)
         pre_times.append(statistics.mean(pre_times))
         print("Average prediction time : ", statistics.mean(pre_times))
-    print("Averages:", meantimes)
+    print("Averages:", mean_times)
     print("finished")
 
 
