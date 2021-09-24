@@ -22,7 +22,7 @@ import os
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 #Machine Learning model
-window_size = 1000
+window_size = 200
 
 label_names = ['Flex Index',
               'Extend Index',
@@ -200,7 +200,7 @@ def viewer(emg_data,label_data,label_time):
 
 def classifier(emg_data,label_data,label_time):
     # 何らかでlistでmodelを格納する
-    cnn_model = load_model('fukano_model_12labels_1000.h5')
+    cnn_model = load_model('models/fukano_model_200_200_10.h5')
     #cnn_model.compile(loss='categorical_crossentropy',optimizer='adam')
     cnn_model.summary()
     program_start_time = time.time()
@@ -230,9 +230,9 @@ def classifier(emg_data,label_data,label_time):
         print("Average prediction time : ", pre_mean)
 
 
-m1 = MyoRaw('/dev/ttyACM2')
+m1 = MyoRaw('/dev/ttyACM0')
 time.sleep(0.2)
-m2 = MyoRaw('/dev/ttyACM3')
+m2 = MyoRaw('/dev/ttyACM1')
 
 
 def myoarmband1(emg_data):
