@@ -128,9 +128,9 @@ def preprocess(x_data,len_window=window_size):
     return x_data3
 
 
-def CreateArray(n,m):
-    mp_arr=mp.Array('i',n*m)
-    arr = np.frombuffer(mp_arr.get_obj(),c.c_int)
+def CreateArray(n, m):
+    mp_arr = mp.Array('i', n*m)
+    arr = np.frombuffer(mp_arr.get_obj(), c.c_int)
     b = arr.reshape((n, m))  # b and arr share the same memory
     return b
 
@@ -230,9 +230,9 @@ def classifier(emg_data,label_data,label_time):
         print("Average prediction time : ", pre_mean)
 
 
-m1 = MyoRaw('/dev/ttyACM0')
+m1 = MyoRaw('/dev/ttyACM2')
 time.sleep(0.2)
-m2 = MyoRaw('/dev/ttyACM1')
+m2 = MyoRaw('/dev/ttyACM3')
 
 
 def myoarmband1(emg_data):
@@ -262,18 +262,18 @@ try:
 
         armband1 = mp.Process(target=myoarmband1,args=(emg_data,))
         armband2 = mp.Process(target=myoarmband2,args=(emg_data,))
-        viewer = mp.Process(target=viewer,args=(emg_data,label_data,label_time))
+        #viewer = mp.Process(target=viewer,args=(emg_data,label_data,label_time))
         classifier = mp.Process(target=classifier,args=(emg_data,label_data,label_time))
 
         armband1.start()
         armband2.start()
         classifier.start()
-        viewer.start()
+        #viewer.start()
         
         armband1.join()
         armband2.join()
         classifier.join()
-        viewer.join()
+        #viewer.join()
 
 
 
