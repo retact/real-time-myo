@@ -1,7 +1,7 @@
 # 
 # Licensed under the MIT license. See the LICENSE file for details.
 #
-
+import os
 import math
 import multiprocessing as mp
 import numpy as np
@@ -200,34 +200,39 @@ def viewer(emg_data,label_data,label_time):
 
 def classifier(emg_data,label_data,label_time):
     # 何らかでlistでmodelを格納する
-    cnn_model = load_model('models/fukano_model_200_200_10.h5')
-    #cnn_model.compile(loss='categorical_crossentropy',optimizer='adam')
-    cnn_model.summary()
-    program_start_time = time.time()
-
+    model_list = .sorted(os.listdir('windowsize-models/'))
+    all_average = np.zeros(10, len(model_list))
+    print("all_average is:", all_average)
+    for count, k in model_list:
+        print(k)
+        cnn_model = load_model('windowsize-models/'+k)
+        # cnn_model.compile(loss='categorical_crossentropy',optimizer='adam')
+        cnn_model.summary()
+        program_start_time = time.time()
+        mean_times = []
+        for j in range(10):
+            pre_times = []
+            for i in range(100):
+                preprocessed = preprocess(emg_data.reshape(1, window_size, 16))
+                emg_data_preprocessed = preprocessed
+                start_time = time.time()
+                label = np.argmax(cnn_model.predict(emg_data_preprocessed.reshape(1,window_size,16,1)))
+                end_time = time.time()
+                print('\nTime Required : %f'%(end_time-start_time))
+                print('Predicted Label : %d'%(label),label_names[label])
+                emg_data_preprocessed[:-1] = emg_data_preprocessed[1:]
+                emg_data_preprocessed[-1] = label
     
-    mean_times = []
-    for j in range(10):
-        pre_times = []
-        for i in range(100):
-            preprocessed = preprocess(emg_data.reshape(1,window_size,16))
-            emg_data_preprocessed = preprocessed
-            start_time = time.time()
-            label = np.argmax(cnn_model.predict(emg_data_preprocessed.reshape(1,window_size,16,1)))
-            end_time = time.time()
-            print('\nTime Required : %f'%(end_time-start_time))
-            print('Predicted Label : %d'%(label),label_names[label])
-            emg_data_preprocessed[:-1] = emg_data_preprocessed[1:]
-            emg_data_preprocessed[-1] = label
-
-            label_data[:-1] = label_data[1:]
-            label_data[-1] = label
-            label_time[:-1] = label_time[1:]
-            label_time[-1] = time.time()-program_start_time
-            pre_times.append(end_time-start_time)
-        mean_times.append(statistics.mean(pre_times))
-        print("Average prediction time : ", statistics.mean(pre_times))
-    print("Averages:", mean_times)
+                label_data[:-1] = label_data[1:]
+                label_data[-1] = label
+                label_time[:-1] = label_time[1:]
+                label_time[-1] = time.time()-program_start_time
+                pre_times.append(end_time-start_time)
+            mean_times.append(statistics.mean(pre_times))
+            print("Average prediction time : ", statistics.mean(pre_times))
+        print("Averages:", mean_times)
+        all_average[count] = mean_times
+    print("all_average is :", all_average)
     print("finished")
 
 
