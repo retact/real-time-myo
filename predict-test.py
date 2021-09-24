@@ -262,18 +262,18 @@ try:
 
         armband1 = mp.Process(target=myoarmband1,args=(emg_data,))
         armband2 = mp.Process(target=myoarmband2,args=(emg_data,))
-        #viewer = mp.Process(target=viewer,args=(emg_data,label_data,label_time))
+        viewer = mp.Process(target=viewer,args=(emg_data,label_data,label_time))
         classifier = mp.Process(target=classifier,args=(emg_data,label_data,label_time))
 
         armband1.start()
         armband2.start()
         classifier.start()
-        #viewer.start()
-        
+        viewer.start()
+
         armband1.join()
         armband2.join()
         classifier.join()
-        #viewer.join()
+        viewer.join()
 
 
 
