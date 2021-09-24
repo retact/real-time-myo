@@ -200,7 +200,7 @@ def viewer(emg_data,label_data,label_time):
 
 def classifier(emg_data,label_data,label_time):
     # 何らかでlistでmodelを格納する
-    cnn_model = load_model('/home/pi/workdir/real-time-myo/models/fukano_model_12labels_1000.h5')
+    cnn_model = load_model('fukano_model_12labels_1000.h5')
     #cnn_model.compile(loss='categorical_crossentropy',optimizer='adam')
     cnn_model.summary()
     program_start_time = time.time()
