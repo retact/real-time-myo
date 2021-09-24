@@ -2,6 +2,7 @@
 # Licensed under the MIT license. See the LICENSE file for details.
 #
 
+import math
 import multiprocessing as mp
 import numpy as np
 import matplotlib.pyplot as plt
@@ -78,7 +79,6 @@ label_names = ['Flex Index',
 ]
 
 
-import math
 def valid_convolve(xx, size):
     b = np.ones(size)/size
     xx_mean = np.convolve(xx, b, mode="same")
@@ -127,11 +127,13 @@ def preprocess(x_data,len_window=window_size):
 
     return x_data3
 
+
 def CreateArray(n,m):
     mp_arr=mp.Array('i',n*m)
     arr = np.frombuffer(mp_arr.get_obj(),c.c_int)
     b = arr.reshape((n, m))  # b and arr share the same memory
     return b
+
 
 def proc_emg1(timestamp, emg, moving, characteristic_num, times=[]):
     #print('Myo1 wrote')
@@ -139,7 +141,7 @@ def proc_emg1(timestamp, emg, moving, characteristic_num, times=[]):
     #print(time.time())
     emg_data[:-1,:8] = emg_data[1:,:8]
     emg_data[-1,:8] = emg
-  
+
 
 def proc_emg2(timestamp, emg, moving, characteristic_num, times=[]):
     #print('Myo2 wrote')
@@ -198,7 +200,7 @@ def viewer(emg_data,label_data,label_time):
 
 def classifier(emg_data,label_data,label_time):
     # 何らかでlistでmodelを格納する
-    cnn_model = load_model('models/fukano_model_12labels_1000.h5')
+    cnn_model = load_model('/home/pi/workdir/real-time-myo/models/fukano_model_12labels_1000.h5')
     #cnn_model.compile(loss='categorical_crossentropy',optimizer='adam')
     cnn_model.summary()
     program_start_time = time.time()
@@ -232,6 +234,7 @@ m1 = MyoRaw('/dev/ttyACM0')
 time.sleep(0.2)
 m2 = MyoRaw('/dev/ttyACM1')
 
+
 def myoarmband1(emg_data):
     m1.add_handler(DataCategory.EMG, proc_emg1)
     m1.subscribe(EMGMode.RAW)
@@ -239,6 +242,7 @@ def myoarmband1(emg_data):
     m1.vibrate(1)
     while True:
         m1.run(1)
+
 
 def myoarmband2(emg_data):
     m2.add_handler(DataCategory.EMG, proc_emg2)
