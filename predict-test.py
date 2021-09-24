@@ -230,9 +230,9 @@ def classifier(emg_data,label_data,label_time):
         print("Average prediction time : ", pre_mean)
 
 
-m1 = MyoRaw('/dev/ttyACM0')
+m1 = MyoRaw('/dev/ttyACM2')
 time.sleep(0.2)
-m2 = MyoRaw('/dev/ttyACM1')
+m2 = MyoRaw('/dev/ttyACM3')
 
 
 def myoarmband1(emg_data):
