@@ -202,10 +202,12 @@ def classifier(emg_data,label_data,label_time):
     # 何らかでlistでmodelを格納する
     model_list = sorted(os.listdir('windowsize-models/'))
     all_average = np.zeros((10, len(model_list))
-    print("all_average is:", all_average)
+    print(all_average)
+    test_models=[]
     for count, k in model_list:
         print(k)
         cnn_model = load_model('windowsize-models/'+k)
+        test_models.append(k)
         # cnn_model.compile(loss='categorical_crossentropy',optimizer='adam')
         cnn_model.summary()
         program_start_time = time.time()
@@ -232,7 +234,7 @@ def classifier(emg_data,label_data,label_time):
             print("Average prediction time : ", statistics.mean(pre_times))
         print("Averages:", mean_times)
         all_average[count] = mean_times
-    print("all_average is :", all_average)
+    print(all_average)
     print("finished")
 
 
