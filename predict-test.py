@@ -204,20 +204,19 @@ def classifier(emg_data,label_data,label_time):
     #cnn_model.compile(loss='categorical_crossentropy',optimizer='adam')
     cnn_model.summary()
     program_start_time = time.time()
-    while True:
+
+    
+    mean_times = []
+    for j in range(10):
         pre_times = []
         for i in range(100):
             preprocessed = preprocess(emg_data.reshape(1,window_size,16))
             emg_data_preprocessed = preprocessed
-
             start_time = time.time()
             label = np.argmax(cnn_model.predict(emg_data_preprocessed.reshape(1,window_size,16,1)))
             end_time = time.time()
-
             print('\nTime Required : %f'%(end_time-start_time))
             print('Predicted Label : %d'%(label),label_names[label])
-
-
             emg_data_preprocessed[:-1] = emg_data_preprocessed[1:]
             emg_data_preprocessed[-1] = label
 
@@ -226,8 +225,10 @@ def classifier(emg_data,label_data,label_time):
             label_time[:-1] = label_time[1:]
             label_time[-1] = time.time()-program_start_time
             pre_times.append(end_time-start_time)
-        pre_mean = statistics.mean(pre_times)
-        print("Average prediction time : ", pre_mean)
+        pre_times.append(statistics.mean(pre_times))
+        print("Average prediction time : ", statistics.mean(pre_times))
+    print("Averages:", meantimes)
+    print("finished")
 
 
 m1 = MyoRaw('/dev/ttyACM0')
@@ -262,18 +263,18 @@ try:
 
         armband1 = mp.Process(target=myoarmband1,args=(emg_data,))
         armband2 = mp.Process(target=myoarmband2,args=(emg_data,))
-        viewer = mp.Process(target=viewer,args=(emg_data,label_data,label_time))
+        # viewer = mp.Process(target=viewer,args=(emg_data,label_data,label_time))
         classifier = mp.Process(target=classifier,args=(emg_data,label_data,label_time))
 
         armband1.start()
         armband2.start()
         classifier.start()
-        viewer.start()
+        # viewer.start()
 
         armband1.join()
         armband2.join()
         classifier.join()
-        viewer.join()
+        # viewer.join()
 
 
 
