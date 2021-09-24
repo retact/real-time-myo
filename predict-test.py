@@ -204,7 +204,7 @@ def classifier(emg_data,label_data,label_time):
     all_average = np.zeros((10, len(model_list)))
     print(all_average)
     test_models=[]
-    for count, k in model_list:
+    for count, k in enumerate(model_list):
         print(k)
         cnn_model = load_model('windowsize-models/'+k)
         test_models.append(k)
