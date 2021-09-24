@@ -64,9 +64,9 @@ def viewer(emg_data):
     ani = FuncAnimation(fig,update,interval=100)
     plt.show()
 
-m1 = MyoRaw('/dev/ttyACM0')
+m1 = MyoRaw('/dev/ttyACM2')
 time.sleep(0.2)
-m2 = MyoRaw('/dev/ttyACM1')
+m2 = MyoRaw('/dev/ttyACM3')
 
 def myoarmband1(emg_data):
     m1.add_handler(DataCategory.EMG, proc_emg1)
