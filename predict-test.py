@@ -235,6 +235,7 @@ def classifier(emg_data,label_data,label_time):
         print("Averages:", mean_times)
         all_average[count] = mean_times
     print(all_average)
+    print(test_models)
     print("finished")
 
 
