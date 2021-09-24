@@ -201,7 +201,7 @@ def viewer(emg_data,label_data,label_time):
 def classifier(emg_data,label_data,label_time):
     # 何らかでlistでmodelを格納する
     model_list = sorted(os.listdir('windowsize-models/'))
-    all_average = np.zeros(10, len(model_list))
+    all_average = np.zeros((10, len(model_list))
     print("all_average is:", all_average)
     for count, k in model_list:
         print(k)
