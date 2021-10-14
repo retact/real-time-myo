@@ -202,7 +202,7 @@ if __name__=='__main__':
         
         armband1 = mp.Process(target=virtual_myo1,args=(emg_data,))
         armband2 = mp.Process(target=virtual_myo2,args=(emg_data,))
-        classifier = mp.Process(target=classifiers,args=(emg_data,))
+        classifier = mp.Process(target=classifiers,args=(emg_data,label_data,label_time))
         viewer = mp.Process(target=viewers,args=(emg_data,))
 
         armband2.start()
