@@ -74,12 +74,12 @@ def preprocess(x_data,len_window=window_size):
 
     return x_data3
 
-path = '../datasets/20210913_fukano/'
-#myo1 = pd.read_csv(path+'section1/above/2021-09-13T18_31_16.434477_emg.csv')
-#myo2 = pd.read_csv(path+'section1/under/2021-09-13T18_31_18.590345_emg.csv')
+#path = '../datasets/20210913_fukano/'
+myo1 = pd.read_csv('section1/above/2021-09-13T18_31_16.434477_emg.csv')
+myo2 = pd.read_csv('section1/under/2021-09-13T18_31_18.590345_emg.csv')
 
-myo1 = pd.read_csv(path+'section2/above/2021-09-13T17_04_26.500235_emg.csv')
-myo2 = pd.read_csv(path+'section2/under/2021-09-13T17_04_29.167477_emg.csv')
+#myo1 = pd.read_csv(path+'section2/above/2021-09-13T17_04_26.500235_emg.csv')
+#myo2 = pd.read_csv(path+'section2/under/2021-09-13T17_04_29.167477_emg.csv')
 
 if myo1['timestamp'][0] <= myo2['timestamp'][0]:
   myo2['timestamp'] -= myo1['timestamp'][0]
