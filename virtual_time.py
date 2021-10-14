@@ -7,7 +7,7 @@ from matplotlib.animation import FuncAnimation
 import pandas as pd
 from tensorflow.keras.layers import Dense, Conv2D, MaxPool2D, Flatten, BatchNormalization, Activation
 from tensorflow.keras.models import Sequential, load_model
-
+import statistics
 window_size = 200
 
 #CPU only
