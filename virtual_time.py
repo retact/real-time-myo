@@ -144,31 +144,6 @@ def classifier(emg_data,label_data,label_time):
     print("Averages:", mean_times)
     print("finished")
 
-def classifiers(emg_data):
-    cnn_model = load_model('models/fukano_8label_windowsize200.h5')
-    #cnn_model.compile(loss='categorical_crossentropy',optimizer='adam')
-    cnn_model.summary()
-    program_start_time = time.time()
-    while True:
-        preprocessed = preprocess(emg_data.reshape(1,window_size,16))
-        emg_data_preprocessed = preprocessed
-
-        start_time = time.time()
-        predicts = cnn_model.predict(emg_data_preprocessed.reshape(1,window_size,16,1))
-        label = np.argmax(predicts)
-        end_time = time.time()
-
-        print('\nTime Required : %f'%(end_time-start_time))
-        print('Predicted Label : %d'%(label),label_names[label])
-
-
-        emg_data_preprocessed[:-1] = emg_data_preprocessed[1:]
-        emg_data_preprocessed[-1] = label
-        label_data[:-1] = label_data[1:]
-        label_data[-1] = label
-        label_time[:-1] = label_time[1:]
-        label_time[-1] = time.time()-program_start_time
-
 def viewers(emg_data):
   fig = plt.figure(figsize=(10,5))
   fig.canvas.set_window_title('Viewer')
