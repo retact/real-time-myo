@@ -114,7 +114,7 @@ def virtual_myo2(emg_data):
     delay = myo2['timestamp'][i+1] - myo2['timestamp'][i]
     time.sleep(delay)
 
-def classifier(emg_data,label_data,label_time):
+def classifiers(emg_data,label_data,label_time):
     # 何らかでlistでmodelを格納する
     cnn_model = load_model('windowsize-models/window200.h5')
     # cnn_model.compile(loss='categorical_crossentropy',optimizer='adam')
